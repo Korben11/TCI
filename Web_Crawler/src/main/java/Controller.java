@@ -44,28 +44,30 @@ public class Controller {
 
     private static void parseUrlToJSON(ArrayList<String> list) throws IOException {
         Document doc;
-        for (String s:list) {
+        for (String s : list) {
             doc = Jsoup.connect(s).get();
             log(doc.title());
             Elements headlines = doc.select("div.media-details");
-            for (Element headline: headlines){
-                if(headline.childNode(3).toString().contains("Book")) {
-                    CrawledData.myCrawledBooks.add(doc.title()+headline.childNode(3).childNode(1).childNode(2).toString());
-                    }else if(headline.childNode(3).toString().contains("Music")) {
-                    CrawledData.myCrawledBooks.add(doc.title()+headline.childNode(3).childNode(1).childNode(2).toString());
-                }else if(headline.childNode(3).toString().contains("Movie")) {
-                    CrawledData.myCrawledBooks.add(doc.title()+headline.childNode(3).childNode(1).childNode(2).toString());
+            for (Element headline : headlines) {
+                if (headline.childNode(3).toString().contains("Book")) {
+                    CrawledData.myCrawledBooks.add(doc.title() + headline.childNode(3).childNode(1).childNode(2).toString());
+                } else if (headline.childNode(3).toString().contains("Music")) {
+                    CrawledData.myCrawledBooks.add(doc.title() + headline.childNode(3).childNode(1).childNode(2).toString());
+                } else if (headline.childNode(3).toString().contains("Movie")) {
+                    CrawledData.myCrawledBooks.add(doc.title() + headline.childNode(3).childNode(1).childNode(2).toString());
                 }
-                }
-            for (String book:CrawledData.myCrawledBooks) {
+            }
+            for (String book : CrawledData.myCrawledBooks) {
                 System.out.println(book);
-            }for (String music:CrawledData.myCrawledMusic) {
+            }
+            for (String music : CrawledData.myCrawledMusic) {
                 System.out.println(music);
-            }for (String movie:CrawledData.myCrawledMovies) {
+            }
+            for (String movie : CrawledData.myCrawledMovies) {
                 System.out.println(movie);
             }
-            }
         }
+    }
 
 
     private static void log(String title) {
