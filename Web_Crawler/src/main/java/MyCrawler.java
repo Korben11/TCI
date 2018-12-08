@@ -7,8 +7,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class MyCrawler extends WebCrawler {
-        private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg"
-                + "|png|mp3|mp4|zip|gz))$");
+        private final static Pattern FILTERS = Pattern.compile(".*(\\.(php))$");
 
         /**
          * This method receives two parameters. The first parameter is the page
