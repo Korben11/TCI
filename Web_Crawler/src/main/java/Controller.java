@@ -58,15 +58,15 @@ public class Controller {
                     CrawledData.myCrawledBooks.add(doc.title() + headline.childNode(3).childNode(1).childNode(2).toString());
                 }
             }
-            for (String book : CrawledData.myCrawledBooks) {
-                System.out.println(book);
-            }
-            for (String music : CrawledData.myCrawledMusic) {
-                System.out.println(music);
-            }
-            for (String movie : CrawledData.myCrawledMovies) {
-                System.out.println(movie);
-            }
+        }
+        for (String book : CrawledData.myCrawledBooks) {
+            System.out.println(book);
+        }
+        for (String music : CrawledData.myCrawledMusic) {
+            System.out.println(music);
+        }
+        for (String movie : CrawledData.myCrawledMovies) {
+            System.out.println(movie);
         }
     }
 
