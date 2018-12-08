@@ -1,11 +1,12 @@
 plugins {
-    id 'java'
-    id 'application'
+    id "java"
+    id "application"
     id 'org.jetbrains.intellij' version '0.3.11'
     id "org.springframework.boot" version "2.0.5.RELEASE"
     id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id "com.palantir.jacoco-coverage" version "0.4.0"
+    id "com.palantir.jacoco-full-report" version "0.4.0"
 }
-
 
 group 'Linh_crawler'
 version '1.0-SNAPSHOT'
@@ -14,9 +15,8 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    maven {
-        url "https://repo.boundlessgeo.com/main/"
-    }
+    maven { url "https://repo.boundlessgeo.com/main/" }
+    maven { url "https://plugins.gradle.org/m2/" }
 }
 
 dependencies {
@@ -25,4 +25,44 @@ dependencies {
     compile 'org.jsoup:jsoup:1.11.3'
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile('org.springframework.boot:spring-boot-starter-test')
+//    classpath "gradle.plugin.com.palantir:jacoco-coverage:0.4.0"
+}
+
+application {
+    mainClassName = "service.Application"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.2"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.8
+            }
+        }
+
+        rule {
+            enabled = false
+            element = 'CLASS'
+            includes = ['org.gradle.*']
+
+            limit {
+                counter = 'LINE'
+                value = 'TOTALCOUNT'
+                maximum = 0.3
+            }
+        }
+    }
 }

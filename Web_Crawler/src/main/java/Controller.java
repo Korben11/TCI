@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Controller {
     public static void main(String[] args) throws Exception {
-        String crawlStorageFolder = "/home/korben/Documents/crawl   ";
+        String crawlStorageFolder = "/home/korben/Documents/crawl";
         int numberOfCrawlers = 1;
 
 
