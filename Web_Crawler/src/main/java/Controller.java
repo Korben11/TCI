@@ -13,8 +13,9 @@ import java.util.ArrayList;
 
 public class Controller {
     public static void main(String[] args) throws Exception {
-        String crawlStorageFolder = "/data/crawl/root";
+        String crawlStorageFolder = "/home/korben/Documents/crawl   ";
         int numberOfCrawlers = 1;
+
 
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
