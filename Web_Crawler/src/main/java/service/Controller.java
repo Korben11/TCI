@@ -1,3 +1,5 @@
+package service;
+
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
 import edu.uci.ics.crawler4j.fetcher.PageFetcher;
@@ -12,8 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Controller {
-    public static void main(String[] args) throws Exception {
-        String crawlStorageFolder = "/home/korben/Documents/crawl";
+    public static void run() throws Exception {
+        String crawlStorageFolder = "/data/crawl/root";
         int numberOfCrawlers = 1;
 
 
@@ -51,11 +53,11 @@ public class Controller {
             Elements headlines = doc.select("div.media-details");
             for (Element headline : headlines) {
                 if (headline.childNode(3).toString().contains("Book")) {
-                    CrawledData.myCrawledBooks.add(doc.title() + headline.childNode(3).childNode(1).childNode(2).toString());
+                    CrawledData.myCrawledBooks.add(doc.title() + headline.childNode(3).childNode(1).toString());
                 } else if (headline.childNode(3).toString().contains("Music")) {
-                    CrawledData.myCrawledBooks.add(doc.title() + headline.childNode(3).childNode(1).childNode(2).toString());
+                    CrawledData.myCrawledBooks.add(doc.title() + headline.childNode(3).childNode(1).toString());
                 } else if (headline.childNode(3).toString().contains("Movie")) {
-                    CrawledData.myCrawledBooks.add(doc.title() + headline.childNode(3).childNode(1).childNode(2).toString());
+                    CrawledData.myCrawledBooks.add(doc.title() + headline.childNode(3).childNode(1).toString());
                 }
             }
         }
