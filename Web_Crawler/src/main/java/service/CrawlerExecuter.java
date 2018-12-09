@@ -12,15 +12,23 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Controller {
-    public static void run() throws Exception {
+public class CrawlerExecuter {
+    /**
+     * main run() method of crawler
+     * @param crawlDepth :limit of the depth of crawling.
+     * @param seedUrl :starting url for crawling.
+     * @throws Exception
+     */
+    public static void run(int crawlDepth, String seedUrl) throws Exception {
+        cleanUpLists();
         String crawlStorageFolder = "/data/crawl/root";
         int numberOfCrawlers = 1;
 
-
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
+        config.setMaxDepthOfCrawling(crawlDepth);
 
         /*
          * Instantiate the controller for this crawl.
@@ -35,21 +43,25 @@ public class Controller {
          * URLs that are fetched and then the crawler starts following links
          * which are found in these pages
          */
-        controller.addSeed("http://i296827.hera.fhict.nl");
+        controller.addSeed(seedUrl);
 
         /*
          * Start the crawl. This is a blocking operation, meaning that your code
          * will reach the line after this only when crawling is finished.
          */
         controller.start(MyCrawler.class, numberOfCrawlers);
-        parseUrlToJSON((ArrayList<String>) CrawledData.myCrawledURLList);
+        pasreUrlDataToList((ArrayList<String>) CrawledData.myCrawledURLList);
     }
 
-    private static void parseUrlToJSON(ArrayList<String> list) throws IOException {
+    /**
+     * Get xml data from given URL list and add them to seperate lists
+     * @param list : list of crawled URLs
+     * @throws IOException
+     */
+    private static void pasreUrlDataToList(ArrayList<String> list) throws IOException {
         Document doc;
         for (String s : list) {
             doc = Jsoup.connect(s).get();
-            log(doc.title());
             Elements headlines = doc.select("div.media-details");
             for (Element headline : headlines) {
                 if (headline.childNode(3).toString().contains("Book")) {
@@ -70,10 +82,18 @@ public class Controller {
         for (String movie : CrawledData.myCrawledMovies) {
             System.out.println(movie);
         }
+        for (String url : CrawledData.myCrawledURLList) {
+            System.out.println(url);
+        }
     }
 
-
-    private static void log(String title) {
-        CrawledData.myCrawledJSONlist.add(title);
+    private static void cleanUpLists()
+    {
+        CrawledData.myCrawledURLList.clear();
+        CrawledData.myCrawledJSONlist.clear();
+        CrawledData.myCrawledBooks.clear();
+        CrawledData.myCrawledMusic.clear();
+        CrawledData.myCrawledMovies.clear();
     }
+
 }

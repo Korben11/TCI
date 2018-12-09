@@ -9,7 +9,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class MyCrawler extends WebCrawler {
-        private final static Pattern FILTERS = Pattern.compile(".*(\\.(php))$");
+        private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg"
+                + "|png|mp3|mp4|zip|gz))$");
 
         /**
          * This method receives two parameters. The first parameter is the page
@@ -36,12 +37,12 @@ public class MyCrawler extends WebCrawler {
         public void visit(Page page) {
         String url = page.getWebURL().getURL();
         System.out.println("URL: " + url);
+        CrawledData.myCrawledURLList.add(url);
 
         if (page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
             String text = htmlParseData.getText();
             String html = htmlParseData.getHtml();
-            CrawledData.myCrawledURLList.add(url);
             Set<WebURL> links = htmlParseData.getOutgoingUrls();
 
             System.out.println("Text length: " + text.length());
