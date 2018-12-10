@@ -13,7 +13,7 @@ public class CrawlerExecuterTest {
     @CsvSource({
             "0,1",
             "1,10",
-            "2,21"
+            "2,20"
     })
     public void testRun(int a, int b) throws Exception {
         myCrawlerExecuter = new CrawlerExecuter();
