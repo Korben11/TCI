@@ -12,6 +12,8 @@ public class MyCrawler extends WebCrawler {
         private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg"
                 + "|png|mp3|mp4|zip|gz))$");
 
+        String seedUrl = CrawledData.seedURL;
+
         /**
          * This method receives two parameters. The first parameter is the page
          * in which we have discovered this new url and the second parameter is
@@ -19,14 +21,14 @@ public class MyCrawler extends WebCrawler {
          * the given url should be crawled or not (based on your crawling logic).
          * In this example, we are instructing the crawler to ignore urls that
          * have css, js, git, ... extensions and to only accept urls that start
-         * with "https://www.ics.uci.edu/". In this case, we didn't need the
+         * with [url]. In this case, we didn't need the
          * referringPage parameter to make the decision.
          */
         @Override
         public boolean shouldVisit(Page referringPage, WebURL url) {
         String href = url.getURL().toLowerCase();
         return !FILTERS.matcher(href).matches()
-                && href.startsWith("http://i296827.hera.fhict.nl/");
+                && href.startsWith(seedUrl);
     }
 
         /**

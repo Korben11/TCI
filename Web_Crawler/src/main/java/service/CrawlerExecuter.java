@@ -44,6 +44,7 @@ public class CrawlerExecuter {
          * which are found in these pages
          */
         controller.addSeed(seedUrl);
+        CrawledData.seedURL = seedUrl;
 
         /*
          * Start the crawl. This is a blocking operation, meaning that your code
@@ -87,6 +88,9 @@ public class CrawlerExecuter {
         }
     }
 
+    /**
+     * clear all data in static lists that are going to be used
+     */
     private static void cleanUpLists()
     {
         CrawledData.myCrawledURLList.clear();
