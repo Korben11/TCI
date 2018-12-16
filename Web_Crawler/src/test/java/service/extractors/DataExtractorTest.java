@@ -17,7 +17,6 @@ import static org.mockito.Mockito.verify;
 
 class DataExtractorTest {
 
-
     private DataExtractor dataExtractor;
     private Document document;
 

@@ -8,6 +8,11 @@ import service.models.Music;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class helps collecting data retrieve from the web crawler and scraper
+ * as files of type Jsoup.Document
+ * and convert them to Book/Movie/Music objects
+ */
 public class DataExtractor {
 
     private List<Book> bookList;
@@ -20,14 +25,26 @@ public class DataExtractor {
         this.movieList = new ArrayList<>();
     }
 
+    /**
+     * Create Book objects from retrieved Document from crawlers & scraper
+     * @param document
+     */
     public void GenerateBookFromDocument(Document document) {
 
     }
 
+    /**
+     * Create Music objects from retrieved Document from crawlers & scraper
+     * @param document
+     */
     public void GenerateMusicFromDocument(Document document) {
 
     }
 
+    /**
+     * Create Movie objects from retrieved Document from crawlers & scraper
+     * @param document
+     */
     public void GenerateMovieFromDocument(Document document) {
 
     }
