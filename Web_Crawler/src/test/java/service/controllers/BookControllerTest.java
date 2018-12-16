@@ -51,7 +51,6 @@ public class BookControllerTest {
         bookTitleList.add("Clean Code: A Handbook of Agile Software Craftsmanship");
         bookTitleList.add("Refactoring: Improving the Design of Existing Code");
         bookTitleList.add("The Clean Coder: A Code of Conduct for Professional Programmers");
-
     }
 
     @After
@@ -60,7 +59,7 @@ public class BookControllerTest {
         fullBookList.clear();
     }
     /**
-     * check if method getAllBookTitles() returns a correct list of all books' found
+     * check if method getAllBook() returns a correct list of all books' found
      */
     @Test
     public void returnAllRetrievedBook(){
@@ -70,6 +69,19 @@ public class BookControllerTest {
         when(book.getAllBooks()).thenReturn(fullBookList);
         //Assert
         assertEquals(fullBookList, book.getAllBooks());
+    }
+
+    /**
+     * very if method getAllBook() was called
+     */
+    @Test
+    public void verifyAllRetrievedBookMethodIsCalled(){
+        //Arrange
+        BookController book = mock(BookController.class);
+        //Act
+        when(book.getAllBooks()).thenReturn(fullBookList);
+        //Assert
+        verify(book).getAllBooks();
     }
 
     /**
@@ -86,19 +98,66 @@ public class BookControllerTest {
     }
 
     /**
+     * check if method getAllBookTitles() returns a correct list of all books' titles found
+     */
+    @Test
+    public void verifyAllRetrievedBookTitles(){
+        //Arrange
+        BookController book = mock(BookController.class);
+        //Act
+        when(book.getAllBookTitles()).thenReturn(bookTitleList);
+        //Assert
+        verify(book).getAllBookTitles();
+    }
+
+    /**
      * check if method getBookWithName() returns a matched book's name with all details
      */
-    @ParameterizedTest(name = "{index} => a={0}")
+    @ParameterizedTest(name = "{index} => a={0}, b={1}")
     @CsvSource({
-            "A Design Patterns",
-            "Clean Code",
-            "Refactoring"
+            "A Design Patterns,0",
+            "Clean Code,1",
+            "Refactoring,2"
     })
-    public void returnABookWithMatchedName(String a){
+    public void returnABookWithMatchedName(String a, int b){
         //Arrange
         BookController book = mock(BookController.class);
         //Act
         //Assert
-        assertEquals(bookTitleList.get(0),book.getABook(a));
+        assertEquals(bookTitleList.get(b),book.getABookWithTitle(a));
+    }
+
+    /**
+     * check if method getBookWithName() returns a matched book's id with all details
+     */
+    @ParameterizedTest(name = "{index} => a={0}, b={1}")
+    @CsvSource({
+            "102,1",
+            "104,3",
+            "101,0"
+    })
+    public void returnABookWithMatchedId(String a, int b){
+        //Arrange
+        BookController book = mock(BookController.class);
+        //Act
+        //Assert
+        assertEquals(bookTitleList.get(b),book.getABookWithMatchedId(a));
+    }
+
+    /**
+     * check if method getBookWithName() returns a matched book's year with all details
+     */
+    @ParameterizedTest(name = "{index} => a={0}")
+    @CsvSource({
+            "2008,1",
+            "1999,2",
+            "2011,3"
+    })
+    public void returnABookWithMatchedYear(String a, int b){
+        //Arrange
+        BookController book = mock(BookController.class);
+        //Act
+        //Assert
+        assertEquals(bookTitleList.get(b),book.getABookWithMatchedYear(a));
     }
 }
