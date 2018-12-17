@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-class DataExtractorTest {
+public class DataExtractorTest {
 
     private DataExtractor dataExtractor;
     private Document document;
