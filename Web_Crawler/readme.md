@@ -41,3 +41,9 @@ run tests in watch mode
 * [ ] JavaDoc comments are used to describe the behaviour of classes and methods
 * [ ] Canvas assignment C is delivered on time
 
+# TODO: part D
+* [ ] JavaDoc comments are used to describe the behaviour of tests
+* [ ] an overview of tests needed for each behaviour is present
+* [ ] an classification of the type of needed unit test is added to the overview of tests (direct/indirect in/outputs, time bound, multithreaded, other)
+* [ ] Canvas assignment D is delivered on time
+
