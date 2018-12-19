@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>service</OriginalElement>
+  <nodes>
+    <node x="0.0" y="531.0">service.models.Movie</node>
+    <node x="0.0" y="410.0">service.models.Crawler</node>
+    <node x="0.0" y="149.0">service.crawlers.BFSCrawler</node>
+    <node x="0.0" y="773.0">service.Application</node>
+    <node x="217.0" y="773.0">service.controllers.CrawlerController</node>
+    <node x="410.0" y="773.0">service.dao.CrawlerDao</node>
+    <node x="21.5" y="0.0">service.crawlers.Crawler</node>
+    <node x="342.0" y="0.0">service.crawlers.NextPageDoesNotExistsException</node>
+    <node x="0.0" y="652.0">service.models.Book</node>
+    <node x="467.0" y="652.0">service.models.Music</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="service.crawlers.BFSCrawler" target="service.crawlers.Crawler">
+      <point x="0.0" y="-108.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="545.5" y="381.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
