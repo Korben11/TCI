@@ -1,125 +1,127 @@
 package service.extractors;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+import service.CrawlerExecuter;
 import service.models.Book;
 import service.models.Movie;
 import service.models.Music;
 
+import javax.xml.crypto.Data;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class DataExtractorTest {
 
     private DataExtractor dataExtractor;
     private Document document;
 
+    /**
+     * This test basically check if Book object is correctly retrieved from the Document file received from the crawler and scraper
+     * It use a mock Document (indirect input) that contains object of Element type which provides data of Book object in HTML format
+     * The method GenerateBookFromDocument with parse those data into a Book object and return it (direct output)
+     * The test should verify if the identification of the expected object resembles the object retrieved from the tested method
+     */
     @Test
     public void GenerateBookFromDocumentMustReturnBookObject(){
+
         //Arrange
-        dataExtractor = mock(DataExtractor.class);
         document = mock(Document.class);
+        dataExtractor = new DataExtractor();
+        Element element = new Element("test");
+        Elements elements = new Elements();
+        elements.add(element);
+        Book book = new Book(1L,
+                "Books",
+                "Tech",
+                "Ebook",
+                Arrays.asList("Robert C. Martin"),
+                "Prentice Hall",
+                "978-013235-0884",
+                2008);
+
+        when(document.select("div.media-details")).thenReturn(elements);
 
         //Act
-        dataExtractor.GenerateBookFromDocument(document);
+        Book returnedBook = dataExtractor.GenerateBookFromDocument(document);
+
 
         //Assert
-        assertEquals(dataExtractor.getBookList().get(dataExtractor.getBookList().size() - 1),
-                new Book(1L,
-                        "Books",
-                        "Tech",
-                        "Ebook",
-                         Arrays.asList("Robert C. Martin"),
-                        "Prentice Hall",
-                        "978-013235-0884",
-                        2008));
-        assertTrue(dataExtractor.getBookList().size() > 0);
+        assertEquals(book, returnedBook);
     }
 
+
+    /**
+     * This test basically check if Music object is correctly retrieved from the Document file received from the crawler and scraper
+     * It use a mock Document (indirect input) that contains object of Element type which provides data of Music object in HTML format
+     * The method GenerateMusicFromDocument with parse those data into a Music object and return it (direct output)
+     * The test should verify if the identification of the expected object resembles the object retrieved from the tested method
+     */
     @Test
     public void GenerateMusicFromDocumentMustReturnMusicObject(){
         //Arrange
-        dataExtractor = mock(DataExtractor.class);
         document = mock(Document.class);
+        dataExtractor = new DataExtractor();
+        Element element = new Element("test");
+        Elements elements = new Elements();
+        elements.add(element);
+        Music music = new Music(1L,
+                "Music",
+                "Classical",
+                "CD",
+                "Ludwig van Beethoven",
+                2012);
+
+        when(document.select("div.media-details")).thenReturn(elements);
 
         //Act
-        dataExtractor.GenerateMusicFromDocument(document);
+        Music returnedMusic = dataExtractor.GenerateMusicFromDocument(document);
 
         //Assert
-        assertEquals(dataExtractor.getMusicList().get(dataExtractor.getMusicList().size() - 1),
-                new Music(1L,
-                        "Music",
-                        "Classical",
-                        "CD",
-                        "Ludwig van Beethoven",
-                        2012));
-        assertTrue(dataExtractor.getMusicList().size() > 0);
+        assertEquals(music, returnedMusic);
     }
 
+
+    /**
+     * This test basically check if Movie object is correctly retrieved from the Document file received from the crawler and scraper
+     * It use a mock Document (indirect input) that contains object of Element type which provides data of Movie object in HTML format
+     * The method GenerateMovieFromDocument with parse those data into a Movie object and return it (direct output)
+     * The test should verify if the identification of the expected object resembles the object retrieved from the tested method
+     */
     @Test
     public void GenerateMovieFromDocumentMustReturnMovieObject(){
         //Arrange
-        dataExtractor = mock(DataExtractor.class);
         document = mock(Document.class);
+        dataExtractor = new DataExtractor();
+        Element element = new Element("test");
+        Elements elements = new Elements();
+        elements.add(element);
+        Movie movie = new Movie(1L,
+                "Forest Gump",
+                "Drama",
+                "DVD",
+                "Robert Zemeckis",
+                Arrays.asList("Winston Groom", "Eric Roth"),
+                Arrays.asList("Tom Hanks", "Rebecca Williams", "Sally Field", "Michael Conner Humphreys"),
+                1994);
+
+        when(document.select("div.media-details")).thenReturn(elements);
 
         //Act
-        dataExtractor.GenerateMovieFromDocument(document);
+        Movie returnedMovie = dataExtractor.GenerateMovieFromDocument(document);
 
         //Assert
-        assertEquals(dataExtractor.getMovieList().get(dataExtractor.getMovieList().size() - 1),
-                new Movie(1L,
-                        "Forest Gump",
-                        "Drama",
-                        "DVD",
-                        "Robert Zemeckis",
-                        Arrays.asList("Winston Groom", "Eric Roth"),
-                        Arrays.asList("Tom Hanks", "Rebecca Williams", "Sally Field", "Michael Conner Humphreys"),
-                        1994));
-        assertTrue(dataExtractor.getMovieList().size() > 0);
+        assertEquals(movie, returnedMovie);
     }
 
-    @Test
-    public void VerifyGenerateBookFromDocumentIsCalled(){
-        //Arrange
-        dataExtractor = mock(DataExtractor.class);
-        document = mock(Document.class);
-
-        //Act
-        dataExtractor.GenerateBookFromDocument(document);
-
-        //Assert
-        verify(dataExtractor).GenerateBookFromDocument(document);
-    }
-
-    @Test
-    public void VerifyGenerateMusicFromDocumentIsCalled(){
-        //Arrange
-        dataExtractor = mock(DataExtractor.class);
-        document = mock(Document.class);
-
-        //Act
-        dataExtractor.GenerateMusicFromDocument(document);
-
-        //Assert
-        verify(dataExtractor).GenerateMusicFromDocument(document);
-    }
-
-    @Test
-    public void VerifyGenerateMovieFromDocumentIsCalled(){
-        //Arrange
-        dataExtractor = mock(DataExtractor.class);
-        document = mock(Document.class);
-
-        //Act
-        dataExtractor.GenerateMovieFromDocument(document);
-
-        //Assert
-        verify(dataExtractor).GenerateMovieFromDocument(document);
-    }
 }

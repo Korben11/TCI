@@ -1,11 +1,14 @@
 package service.extractors;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import service.models.Book;
 import service.models.Movie;
 import service.models.Music;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,24 +32,30 @@ public class DataExtractor {
      * Create Book objects from retrieved Document from crawlers & scraper
      * @param document
      */
-    public void GenerateBookFromDocument(Document document) {
-
+    public Book GenerateBookFromDocument(Document document) {
+//        Elements headlines = document.select("div.media-details");
+//        for (Element headline : headlines) {
+//            if(headline.tagName() == "test"){
+//                return new Book();
+//            }
+//        }
+        return null;
     }
 
     /**
      * Create Music objects from retrieved Document from crawlers & scraper
      * @param document
      */
-    public void GenerateMusicFromDocument(Document document) {
-
+    public Music GenerateMusicFromDocument(Document document) {
+        return null;
     }
 
     /**
      * Create Movie objects from retrieved Document from crawlers & scraper
      * @param document
      */
-    public void GenerateMovieFromDocument(Document document) {
-
+    public Movie GenerateMovieFromDocument(Document document) {
+        return null;
     }
 
     public List<Book> getBookList() {
