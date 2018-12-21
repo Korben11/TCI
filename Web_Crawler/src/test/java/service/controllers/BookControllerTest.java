@@ -59,7 +59,9 @@ public class BookControllerTest {
         fullBookList.clear();
     }
     /**
-     * check if method getAllBook() returns a correct list of all books' found
+     * getAllBook() return a list of book which is an indirect output
+     * Create a mock book object to test its method.
+     * Check if the method getAllBooks() return all books
      */
     @Test
     public void returnAllRetrievedBook(){
@@ -72,7 +74,9 @@ public class BookControllerTest {
     }
 
     /**
-     * very if method getAllBook() was called
+     * Create a mock book object to test its method.
+     * getAllBook() return a list of book which is an indirect output
+     * verify if method getAllBook() was called
      */
     @Test
     public void verifyAllRetrievedBookMethodIsCalled(){
@@ -85,6 +89,8 @@ public class BookControllerTest {
     }
 
     /**
+     * Create a mock book object to test its method.
+     * getAllBookTitles() return a list of book titles which is an indirect output
      * check if method getAllBookTitles() returns a correct list of all books' titles found
      */
     @Test
@@ -98,7 +104,9 @@ public class BookControllerTest {
     }
 
     /**
-     * check if method getAllBookTitles() returns a correct list of all books' titles found
+     * Create a mock book object to test its method.
+     * getAllBookTitles() return a list of book titles which is an indirect output
+     * verify if method getAllBookTitles() was called
      */
     @Test
     public void verifyAllRetrievedBookTitles(){
@@ -111,7 +119,9 @@ public class BookControllerTest {
     }
 
     /**
-     * check if method getBookWithName() returns a matched book's name with all details
+     * Create a mock book object
+     * Pass direct input a and b to methods bookTitleList.get() and book.getABookWithTitle() respectively to get direct outputs     *
+     * Check if method getBookWithName() returns a matched book's name with all details 3 times with 3 different direct inputs
      */
     @ParameterizedTest(name = "{index} => a={0}, b={1}")
     @CsvSource({
@@ -128,7 +138,9 @@ public class BookControllerTest {
     }
 
     /**
-     * check if method getBookWithName() returns a matched book's id with all details
+     * Create a mock book object
+     * Pass direct input a and b to methods bookTitleList.get() and book.getABookWithMatchedId() respectively to get direct outputs     *
+     * Check if method getABookWithMatchedId() returns a matched book's name with all details 3 times with 3 different direct inputs
      */
     @ParameterizedTest(name = "{index} => a={0}, b={1}")
     @CsvSource({
@@ -145,7 +157,9 @@ public class BookControllerTest {
     }
 
     /**
-     * check if method getBookWithName() returns a matched book's year with all details
+     * Create a mock book object
+     * Pass direct input a and b to methods bookTitleList.get() and book.getABookWithMatchedYear() respectively to get direct outputs     *
+     * Check if method getABookWithMatchedYear() returns a matched book's name with all details 3 times with 3 different direct inputs
      */
     @ParameterizedTest(name = "{index} => a={0}")
     @CsvSource({
