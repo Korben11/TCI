@@ -11,6 +11,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class BFSCrawler implements Crawler {
+    public URL getStartingUrl() {
+        return startingUrl;
+    }
+
     private URL startingUrl;
     private List<String> visitedPages;
 //    private Set<String> visitedPages;
