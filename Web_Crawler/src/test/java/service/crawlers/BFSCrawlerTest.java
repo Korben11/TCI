@@ -23,6 +23,7 @@ public class BFSCrawlerTest {
      *
      * Create invalid crawler
      *
+     * @type direct
      * @throws MalformedURLException
      */
     @Test(expected = MalformedURLException.class)
@@ -38,6 +39,7 @@ public class BFSCrawlerTest {
      *
      * Create valid crawler
      *
+     * @type direct
      * @throws MalformedURLException
      * @result Crawler with correct url was created
      */
@@ -56,6 +58,7 @@ public class BFSCrawlerTest {
      *
      * try to get next page, expected to return jsoup document
      *
+     * @type indirect, mock jsoup
      * @throws MalformedURLException
      * @throws NextPageDoesNotExistsException
      * @result next page should be returned as instance of jsoup document
@@ -80,6 +83,7 @@ public class BFSCrawlerTest {
      *
      * test if crawler has next page to crawl
      *
+     * @type direct
      * @throws MalformedURLException
      * @result true, crawler should have page to continue with
      */
@@ -105,6 +109,7 @@ public class BFSCrawlerTest {
      *
      * test if crawler has next page to crawl
      *
+     * @type direct
      * @throws MalformedURLException
      * @result false, crawler should not have page to continue with
      */
@@ -126,6 +131,7 @@ public class BFSCrawlerTest {
      *
      * test if domain is matching website being crawled
      *
+     * @type direct
      * @throws MalformedURLException
      * @result true, domain should match
      */
@@ -149,6 +155,7 @@ public class BFSCrawlerTest {
      * test if domain is matching website being crawled
      * in this case domain should not match
      *
+     * @type direct
      * @throws MalformedURLException
      * @result false, domain should not match
      */
