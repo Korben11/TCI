@@ -19,6 +19,12 @@ public class BFSCrawlerTest {
 
     }
 
+    /**
+     *
+     * Create invalid crawler
+     *
+     * @throws MalformedURLException
+     */
     @Test(expected = MalformedURLException.class)
     public void constructorBFSCrawler() throws MalformedURLException {
         // arrange
@@ -28,6 +34,32 @@ public class BFSCrawlerTest {
         BFSCrawler crawler = new BFSCrawler(wrongUrl);
     }
 
+    /**
+     *
+     * Create valid crawler
+     *
+     * @throws MalformedURLException
+     * @result Crawler with correct url was created
+     */
+    @Test()
+    public void constructorBFSCrawlerValid() throws MalformedURLException {
+        // arrange
+
+        // act
+        BFSCrawler crawler = new BFSCrawler(url);
+
+        // assert
+        assertTrue(crawler.getStartingUrl().toString().equals(this.url));
+    }
+
+    /**
+     *
+     * try to get next page, expected to return jsoup document
+     *
+     * @throws MalformedURLException
+     * @throws NextPageDoesNotExistsException
+     * @result next page should be returned as instance of jsoup document
+     */
     @Test
     public void next() throws MalformedURLException, NextPageDoesNotExistsException {
         // arrange
@@ -44,6 +76,13 @@ public class BFSCrawlerTest {
 
     }
 
+    /**
+     *
+     * test if crawler has next page to crawl
+     *
+     * @throws MalformedURLException
+     * @result true, crawler should have page to continue with
+     */
     @Test
     public void hasNext() throws MalformedURLException {
         // arrange
@@ -62,6 +101,13 @@ public class BFSCrawlerTest {
         assertTrue(hasNext);
     }
 
+    /**
+     *
+     * test if crawler has next page to crawl
+     *
+     * @throws MalformedURLException
+     * @result false, crawler should not have page to continue with
+     */
     @Test
     public void doesntHaveNext() throws MalformedURLException {
         // arrange
@@ -76,6 +122,13 @@ public class BFSCrawlerTest {
         assertFalse(hasNext);
     }
 
+    /**
+     *
+     * test if domain is matching website being crawled
+     *
+     * @throws MalformedURLException
+     * @result true, domain should match
+     */
     @Test
     public void matchingDomain() throws MalformedURLException {
         // arrange
@@ -91,6 +144,14 @@ public class BFSCrawlerTest {
         assertTrue(mathingDomain);
     }
 
+    /**
+     *
+     * test if domain is matching website being crawled
+     * in this case domain should not match
+     *
+     * @throws MalformedURLException
+     * @result false, domain should not match
+     */
     @Test
     public void domainDoesNotMatch() throws MalformedURLException {
         // arrange
