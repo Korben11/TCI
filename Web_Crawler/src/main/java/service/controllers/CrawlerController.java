@@ -89,7 +89,7 @@ public class CrawlerController {
     public String ConvertBookObjectToJson(Book b) throws JsonProcessingException {
         mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        String s = mapper.writeValueAsString(b);
+        String s = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(b);
         return s;
     }
 
@@ -101,7 +101,9 @@ public class CrawlerController {
      */
     public String ConvertMovieObjectToJson(Movie m) throws JsonProcessingException {
         mapper = new ObjectMapper();
-        return mapper.writeValueAsString(m);
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        String s = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(m);
+        return s;
     }
 
     /**
@@ -112,7 +114,9 @@ public class CrawlerController {
      */
     public String ConvertMusicObjectToJson(Music m) throws JsonProcessingException {
         mapper = new ObjectMapper();
-        return mapper.writeValueAsString(m);
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        String s = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(m);
+        return s;
     }
 
 
