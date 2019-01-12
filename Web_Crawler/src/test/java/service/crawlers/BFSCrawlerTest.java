@@ -1,14 +1,14 @@
 package service.crawlers;
 
 import org.jsoup.nodes.Document;
-import javassist.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.net.MalformedURLException;
 import java.util.LinkedList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class BFSCrawlerTest {
 
