@@ -23,10 +23,10 @@ public class DataExtractor {
     private List<Music> musicList;
     private List<Movie> movieList;
     private Long idCounter;
-    String category, genre, format, director, artist, publisher, isbn;
-    int year;
-    List<String> writers, stars, authors;
-    
+    private String category, genre, format, director, artist, publisher, isbn;
+    private int year;
+    private List<String> writers, stars, authors;
+
     public DataExtractor() {
         idCounter = 0L;
     }
@@ -36,32 +36,60 @@ public class DataExtractor {
      * @param document
      */
     public List<Book> GenerateBookFromDocument(Document document) {
-        musicList = new ArrayList<>();
-        Elements headlines = document.select("div.media-details").select("table").select("tbody");
+        bookList = new ArrayList<>();
+        Elements headlines = document.select("tbody");
         for (Element headline : headlines) {
-            if (headline.childNode(0).toString().contains("Music")) {
+            if (headline.childNode(0).toString().contains("Books")) {
                 String title = document.title();
                 for (Node n : headline.childNodes()){
-                    if (n.childNode(1).toString().contains("Category")){
-                        category = n.childNode(3).childNode(0).toString();
+                    if (n.childNodes().toString().contains("Category")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                category = node.childNode(0).toString();
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Genre")){
-                        genre = n.childNode(3).childNode(0).toString();
+                    else if (n.childNodes().toString().contains("Genre")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                genre = node.childNode(0).toString();
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Format")){
-                        format = n.childNode(3).childNode(0).toString();
+                    else if (n.childNodes().toString().contains("Format")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                format = node.childNode(0).toString();
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Publisher")){
-                        publisher = n.childNode(3).childNode(0).toString();
+                    else if (n.childNodes().toString().contains("Publisher")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                publisher = node.childNode(0).toString();
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("ISBN")){
-                        isbn = n.childNode(3).childNode(0).toString();
+                    else if (n.childNodes().toString().contains("ISBN")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                isbn = node.childNode(0).toString();
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Authors")){
-                        authors = Arrays.asList(n.childNode(3).childNode(0).toString().split("\\s*,\\s*"));
+                    else if (n.childNodes().toString().contains("Authors")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                authors = Arrays.asList(node.childNode(0).toString().split("\\s*,\\s*"));
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Year")){
-                        year = Integer.parseInt(n.childNode(3).childNode(0).toString());
+                    else if (n.childNodes().toString().contains("Year")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                year = Integer.parseInt(node.childNode(0).toString());
+                            }
+                        }
                     }
                 }
                 Book book = new Book(idCounter++, title, category, genre, format, authors, publisher, isbn, year);
@@ -77,25 +105,45 @@ public class DataExtractor {
      */
     public List<Music> GenerateMusicFromDocument(Document document) {
         musicList = new ArrayList<>();
-        Elements headlines = document.select("div.media-details").select("table").select("tbody");
+        Elements headlines = document.select("tbody");
         for (Element headline : headlines) {
             if (headline.childNode(0).toString().contains("Music")) {
                 String title = document.title();
                 for (Node n : headline.childNodes()){
-                    if (n.childNode(1).toString().contains("Category")){
-                        category = n.childNode(3).childNode(0).toString();
+                    if (n.childNodes().toString().contains("Category")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                category = node.childNode(0).toString();
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Genre")){
-                        genre = n.childNode(3).childNode(0).toString();
+                    else if (n.childNodes().toString().contains("Genre")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                genre = node.childNode(0).toString();
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Format")){
-                        format = n.childNode(3).childNode(0).toString();
+                    else if (n.childNodes().toString().contains("Format")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                format = node.childNode(0).toString();
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Artist")){
-                        artist = n.childNode(3).childNode(0).toString();
+                    else if (n.childNodes().toString().contains("Artist")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                artist = node.childNode(0).toString();
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Year")){
-                        year = Integer.parseInt(n.childNode(3).childNode(0).toString());
+                    else if (n.childNodes().toString().contains("Year")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                year = Integer.parseInt(node.childNode(0).toString());
+                            }
+                        }
                     }
                 }
                 Music music = new Music(idCounter++, title, category, genre, format, artist, year);
@@ -111,32 +159,59 @@ public class DataExtractor {
      */
     public List<Movie> GenerateMovieFromDocument(Document document) {
         movieList = new ArrayList<>();
-        Elements headlines = document.select("div.media-details").select("table").select("tbody");
+        Elements headlines = document.select("tbody");
         for (Element headline : headlines) {
-            if (headline.childNode(0).toString().contains("Book")) {
+            if (headline.childNode(0).toString().contains("Movies")) {
                 String title = document.title();
-
                 for (Node n : headline.childNodes()){
-                    if (n.childNode(1).toString().contains("Category")){
-                        category = n.childNode(3).childNode(0).toString();
+                    if (n.childNodes().toString().contains("Category")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                category = node.childNode(0).toString();
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Genre")){
-                        genre = n.childNode(3).childNode(0).toString();
+                    else if (n.childNodes().toString().contains("Genre")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                genre = node.childNode(0).toString();
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Format")){
-                        format = n.childNode(3).childNode(0).toString();
+                    else if (n.childNodes().toString().contains("Format")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                format = node.childNode(0).toString();
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Director")){
-                        director = n.childNode(3).childNode(0).toString();
+                    else if (n.childNodes().toString().contains("Director")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                director = node.childNode(0).toString();
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Year")){
-                        year = Integer.parseInt(n.childNode(3).childNode(0).toString());
+                    else if (n.childNodes().toString().contains("Writers")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                writers = Arrays.asList(node.childNode(0).toString().split("\\s*,\\s*"));
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Writers")){
-                        writers = Arrays.asList(n.childNode(3).childNode(0).toString().split("\\s*,\\s*"));
+                    else if (n.childNodes().toString().contains("Stars")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                stars = Arrays.asList(node.childNode(0).toString().split("\\s*,\\s*"));
+                            }
+                        }
                     }
-                    else if (n.childNode(1).toString().contains("Stars")){
-                        stars = Arrays.asList(n.childNode(3).childNode(0).toString().split("\\s*,\\s*"));
+                    else if (n.childNodes().toString().contains("Year")){
+                        for (Node node : n.childNodes()){
+                            if(node.toString().contains("td")){
+                                year = Integer.parseInt(node.childNode(0).toString());
+                            }
+                        }
                     }
                 }
                 Movie movie = new Movie(idCounter++, title, category, genre, format, director, writers, stars, year);
