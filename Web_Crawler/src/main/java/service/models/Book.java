@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Book {
     private Long id;
+    private String title;
     private String category;
     private String genre;
     private String format;
@@ -15,8 +16,9 @@ public class Book {
     public Book() {
     }
 
-    public Book(Long id, String category, String genre, String format, List<String> author, String publisher, String isbn, int year) {
+    public Book(Long id, String title, String category, String genre, String format, List<String> author, String publisher, String isbn, int year) {
         this.id = id;
+        this.title = title;
         this.category = category;
         this.genre = genre;
         this.format = format;
