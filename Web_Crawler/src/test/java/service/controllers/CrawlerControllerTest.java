@@ -15,6 +15,7 @@ public class CrawlerControllerTest {
     public void GetAllBooksShouldReturnListOfAllBook(){
         //Arrange
         Book book = new Book(1L,
+                "FlyWithMe",
                 "Books",
                 "Tech",
                 "Ebook",
@@ -30,6 +31,7 @@ public class CrawlerControllerTest {
     public void ConvertBookObjectToJsonShouldReturnAStringWithJsonFormat() throws JsonProcessingException {
         //Arrange
         Book book = new Book(1L,
+                "FlyWithMe",
                 "Books",
                 "Tech",
                 "Ebook",
@@ -37,9 +39,21 @@ public class CrawlerControllerTest {
                 "Prentice Hall",
                 "978-013235-0884",
                 2008);
+        String expectedJson = "{\n" +
+                "  \"id\" : 1,\n" +
+                "  \"title\" : \"FlyWithMe\",\n" +
+                "  \"category\" : \"Books\",\n" +
+                "  \"genre\" : \"Tech\",\n" +
+                "  \"format\" : \"Ebook\",\n" +
+                "  \"author\" : [ \"Robert C. Martin\" ],\n" +
+                "  \"publisher\" : \"Prentice Hall\",\n" +
+                "  \"isbn\" : \"978-013235-0884\",\n" +
+                "  \"year\" : 2008\n" +
+                "}";
         //Act
         String s = crawlerController.ConvertBookObjectToJson(book);
         //Assert
+        Assert.assertEquals(expectedJson,s);
     }
 
 }
