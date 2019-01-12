@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class Music {
+
     private Long id;
     private String title;
     private String category;
@@ -12,6 +13,34 @@ public class Music {
     private String format;
     private String artist;
     private int year;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public int getYear() {
+        return year;
+    }
 
     public Music(Long id, String title, String category, String genre, String format, String artist, int year) {
         this.id = id;
