@@ -20,7 +20,7 @@ public class BFSCrawler implements Crawler {
     private List<String> nextPages;
     private int maxDepth = 0;
 
-    BFSCrawler(String startingUrl, Connection connection) throws MalformedURLException {
+    public BFSCrawler(String startingUrl, Connection connection) throws MalformedURLException {
         this.connection = connection;
         this.startingUrl = new URL(startingUrl);
         this.visitedPages = new LinkedList<>();
