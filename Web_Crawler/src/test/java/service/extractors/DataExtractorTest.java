@@ -42,6 +42,7 @@ public class DataExtractorTest {
         Elements elements = new Elements();
         elements.add(element);
         Book book = new Book(1L,
+                "",
                 "Books",
                 "Tech",
                 "Ebook",
@@ -53,7 +54,7 @@ public class DataExtractorTest {
         when(document.select("div.media-details")).thenReturn(elements);
 
         //Act
-        Book returnedBook = dataExtractor.GenerateBookFromDocument(document);
+        Book returnedBook = (Book) dataExtractor.GenerateBookFromDocument(document);
 
 
         //Assert
@@ -76,6 +77,7 @@ public class DataExtractorTest {
         Elements elements = new Elements();
         elements.add(element);
         Music music = new Music(1L,
+                "",
                 "Music",
                 "Classical",
                 "CD",
@@ -85,7 +87,7 @@ public class DataExtractorTest {
         when(document.select("div.media-details")).thenReturn(elements);
 
         //Act
-        Music returnedMusic = dataExtractor.GenerateMusicFromDocument(document);
+        Music returnedMusic = (Music) dataExtractor.GenerateMusicFromDocument(document);
 
         //Assert
         assertEquals(music, returnedMusic);
@@ -107,6 +109,7 @@ public class DataExtractorTest {
         Elements elements = new Elements();
         elements.add(element);
         Movie movie = new Movie(1L,
+                "Forest",
                 "Forest Gump",
                 "Drama",
                 "DVD",
@@ -118,7 +121,7 @@ public class DataExtractorTest {
         when(document.select("div.media-details")).thenReturn(elements);
 
         //Act
-        Movie returnedMovie = dataExtractor.GenerateMovieFromDocument(document);
+        Movie returnedMovie = (Movie) dataExtractor.GenerateMovieFromDocument(document);
 
         //Assert
         assertEquals(movie, returnedMovie);

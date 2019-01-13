@@ -30,29 +30,27 @@ public class CrawlerController {
     //return book/music/movie from document object
 
     @GetMapping(pathToBooks)
-    public List GetAllBooks() throws JsonProcessingException {
-//        ArrayList<String> bookJSONList = new ArrayList<>();
-//        List<Book> books = dataExtractor.getBookList();
-//        for (Book b : books) {
-//            bookJSONList.add(ConvertBookObjectToJson(b));
-//        }
-//        return bookJSONList;
-        return null;
+    public List GetAllBooksJson() throws JsonProcessingException {
+        ArrayList<String> bookJSONList = new ArrayList<>();
+        List<Book> books = dataExtractor.getBookList();
+        for (Book b : books) {
+            bookJSONList.add(ConvertBookObjectToJson(b));
+        }
+        return bookJSONList;
     }
 
     @GetMapping(pathToMusic)
-    public List GetAllMuic() throws JsonProcessingException {
-//        ArrayList<String> musicJSONList = new ArrayList<>();
-//        List<Music> music = dataExtractor.getMusicList();
-//        for (Music m : music) {
-//            musicJSONList.add(ConvertMusicObjectToJson(m));
-//        }
-//        return musicJSONList;
-        return null;
+    public List GetAllMusicJson() throws JsonProcessingException {
+        ArrayList<String> musicJSONList = new ArrayList<>();
+        List<Music> music = dataExtractor.getMusicList();
+        for (Music m : music) {
+            musicJSONList.add(ConvertMusicObjectToJson(m));
+        }
+        return musicJSONList;
     }
 
     @GetMapping(pathToMovies)
-    public List GetAllMovies() throws JsonProcessingException {
+    public List GetAllMoviesJson() throws JsonProcessingException {
 //        ArrayList<String> movieJSONList = new ArrayList<>();
 //        List<Movie> movies = dataExtractor.getMovieList();
 //        for (Movie m : movies) {
