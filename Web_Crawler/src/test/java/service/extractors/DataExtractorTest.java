@@ -2,6 +2,7 @@ package service.extractors;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 import service.models.Book;
@@ -18,10 +19,10 @@ public class DataExtractorTest {
     private Document document;
 
     /**
-     * This test basically check if Book object is correctly retrieved from the Document file received from the crawler and scraper
-     * It use a mock Document (indirect input) that contains object of Element type which provides data of Book object in HTML format
-     * The method GenerateBookFromDocument with parse those data into a Book object and return it (direct output)
-     * The test should verify if the identification of the expected object resembles the object retrieved from the tested method
+     * This test checks if Book objects are correctly retrieved from the Document file received from the crawler and scraper
+     * It use a mocked Document that contains objects of Element type which provides data of Book objects in HTML format
+     * The method GenerateBookFromDocument with parse those data into Book objects and return them
+     * The test basically determines if the identification of the expected object resembles the objects declared in the test method
      */
     @Test
     public void GenerateBookFromDocumentMustReturnBookObject(){
@@ -70,10 +71,10 @@ public class DataExtractorTest {
 
 
     /**
-     * This test basically check if Music object is correctly retrieved from the Document file received from the crawler and scraper
-     * It use a mock Document (indirect input) that contains object of Element type which provides data of Music object in HTML format
-     * The method GenerateMusicFromDocument with parse those data into a Music object and return it (direct output)
-     * The test should verify if the identification of the expected object resembles the object retrieved from the tested method
+     * This test checks if Music objects are correctly retrieved from the Document file received from the crawler and scraper
+     * It use a mocked Document that contains objects of Element type which provides data of Music objects in HTML format
+     * The method GenerateMusicFromDocument with parse those data into Music objects and return them
+     * The test basically determines if the identification of the expected object resembles the objects declared in the test method
      */
     @Test
     public void GenerateMusicFromDocumentMustReturnMusicObject(){
@@ -116,10 +117,10 @@ public class DataExtractorTest {
 
 
     /**
-     * This test basically check if Movie object is correctly retrieved from the Document file received from the crawler and scraper
-     * It use a mock Document (indirect input) that contains object of Element type which provides data of Movie object in HTML format
-     * The method GenerateMovieFromDocument with parse those data into a Movie object and return it (direct output)
-     * The test should verify if the identification of the expected object resembles the object retrieved from the tested method
+     * This test checks if Movie objects are correctly retrieved from the Document file received from the crawler and scraper
+     * It use a mocked Document that contains objects of Element type which provides data of Movie objects in HTML format
+     * The method GenerateMovieFromDocument with parse those data into Movie objects and return them
+     * The test basically determines if the identification of the expected object resembles the objects declared in the test method
      */
     @Test
     public void GenerateMovieFromDocumentMustReturnMovieObject(){
@@ -167,4 +168,87 @@ public class DataExtractorTest {
         assertTrue(returnedMovie.get(0).getWriter().contains("Winston Groom") && returnedMovie.get(0).getWriter().contains("Eric Roth"));
     }
 
+
+    /**
+     * This test checks if the movie title can be retrieved from the Document file received from the crawler and scraper
+     * It use mocked Document, Node and Element that help checking if the HTML data retrieved are that of Movie objects
+     * The test should verify if the title() method is called during the data extracting process
+     */
+    @Test
+    public void GenerateMovieFromDocumentShouldGetDocumentTitle(){
+
+        //Arrange
+        document = mock(Document.class);
+        Node node = mock(Node.class);
+        Element element = mock(Element.class);
+        Elements elements = new Elements();
+        elements.add(element);
+        dataExtractor = new DataExtractor();
+
+        when(document.select("tbody")).thenReturn(elements);
+        when(element.childNode(0)).thenReturn(node);
+        when(node.toString()).thenReturn("Movies");
+
+        //Act
+        dataExtractor.GenerateMovieFromDocument(document);
+
+        //Assert
+        verify(document).title();
+    }
+
+
+    /**
+     * This test checks if the music title can be retrieved from the Document file received from the crawler and scraper
+     * It use mocked Document, Node and Element that help checking if the HTML data retrieved are that of Music objects
+     * The test should verify if the title() method is called during the data extracting process
+     */
+    @Test
+    public void GenerateMusicFromDocumentShouldGetDocumentTitle(){
+
+        //Arrange
+        document = mock(Document.class);
+        Node node = mock(Node.class);
+        Element element = mock(Element.class);
+        Elements elements = new Elements();
+        elements.add(element);
+        dataExtractor = new DataExtractor();
+
+        when(document.select("tbody")).thenReturn(elements);
+        when(element.childNode(0)).thenReturn(node);
+        when(node.toString()).thenReturn("Music");
+
+        //Act
+        dataExtractor.GenerateMusicFromDocument(document);
+
+        //Assert
+        verify(document).title();
+    }
+
+
+    /**
+     * This test checks if the book title can be retrieved from the Document file received from the crawler and scraper
+     * It use mocked Document, Node and Element that help checking if the HTML data retrieved are that of Book objects
+     * The test should verify if the title() method is called during the data extracting process
+     */
+    @Test
+    public void GenerateBookFromDocumentShouldGetDocumentTitle(){
+
+        //Arrange
+        document = mock(Document.class);
+        Node node = mock(Node.class);
+        Element element = mock(Element.class);
+        Elements elements = new Elements();
+        elements.add(element);
+        dataExtractor = new DataExtractor();
+
+        when(document.select("tbody")).thenReturn(elements);
+        when(element.childNode(0)).thenReturn(node);
+        when(node.toString()).thenReturn("Books");
+
+        //Act
+        dataExtractor.GenerateBookFromDocument(document);
+
+        //Assert
+        verify(document).title();
+    }
 }
