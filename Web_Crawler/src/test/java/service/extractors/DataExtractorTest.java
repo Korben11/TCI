@@ -61,12 +61,11 @@ public class DataExtractorTest {
         when(document.title()).thenReturn(title);
 
         //Act
-        List<Book> returnedBook = dataExtractor.GenerateBookFromDocument(document);
+        Book returnedBook = dataExtractor.GenerateBookFromDocument(document);
 
         //Assert
-        assertEquals(1, returnedBook.size());
-        assertTrue(returnedBook.get(0).getTitle() == title);
-        assertEquals("007-6092046981", returnedBook.get(0).getIsbn());
+        assertTrue(returnedBook.getTitle() == title);
+        assertEquals("007-6092046981", returnedBook.getIsbn());
     }
 
 
@@ -107,12 +106,11 @@ public class DataExtractorTest {
         when(document.title()).thenReturn(title);
 
         //Act
-        List<Music> returnedMusic = dataExtractor.GenerateMusicFromDocument(document);
+        Music returnedMusic = dataExtractor.GenerateMusicFromDocument(document);
 
         //Assert
-        assertEquals(1, returnedMusic.size());
-        assertTrue(returnedMusic.get(0).getTitle() == title);
-        assertEquals("Elvis Presley", returnedMusic.get(0).getArtist());
+        assertTrue(returnedMusic.getTitle() == title);
+        assertEquals("Elvis Presley", returnedMusic.getArtist());
     }
 
 
@@ -159,13 +157,12 @@ public class DataExtractorTest {
         when(document.title()).thenReturn(title);
 
         //Act
-        List<Movie> returnedMovie = dataExtractor.GenerateMovieFromDocument(document);
+        Movie returnedMovie = dataExtractor.GenerateMovieFromDocument(document);
 
         //Assert
-        assertEquals(1, returnedMovie.size());
-        assertTrue(returnedMovie.get(0).getTitle() == title);
-        assertEquals(2, returnedMovie.get(0).getWriter().size());
-        assertTrue(returnedMovie.get(0).getWriter().contains("Winston Groom") && returnedMovie.get(0).getWriter().contains("Eric Roth"));
+        assertTrue(returnedMovie.getTitle() == title);
+        assertEquals(2, returnedMovie.getWriter().size());
+        assertTrue(returnedMovie.getWriter().contains("Winston Groom") && returnedMovie.getWriter().contains("Eric Roth"));
     }
 
 

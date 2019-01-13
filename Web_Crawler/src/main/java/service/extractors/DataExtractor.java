@@ -35,8 +35,7 @@ public class DataExtractor {
      * Create Book objects from retrieved Document from crawlers & scraper
      * @param document
      */
-    public List<Book> GenerateBookFromDocument(Document document) {
-        bookList = new ArrayList<>();
+    public Book GenerateBookFromDocument(Document document) {
         Elements headlines = document.select("tbody");
         for (Element headline : headlines) {
             if (headline.childNode(0).toString().contains("Books")) {
@@ -93,18 +92,17 @@ public class DataExtractor {
                     }
                 }
                 Book book = new Book(idCounter++, title, category, genre, format, authors, publisher, isbn, year);
-                bookList.add(book);
+                return book;
             }
         }
-        return bookList;
+        return null;
     }
 
     /**
      * Create Music objects from retrieved Document from crawlers & scraper
      * @param document
      */
-    public List<Music> GenerateMusicFromDocument(Document document) {
-        musicList = new ArrayList<>();
+    public Music GenerateMusicFromDocument(Document document) {
         Elements headlines = document.select("tbody");
         for (Element headline : headlines) {
             if (headline.childNode(0).toString().contains("Music")) {
@@ -147,18 +145,17 @@ public class DataExtractor {
                     }
                 }
                 Music music = new Music(idCounter++, title, category, genre, format, artist, year);
-                musicList.add(music);
+                return music;
             }
         }
-        return musicList;
+        return null;
     }
 
     /**
      * Create Movie objects from retrieved Document from crawlers & scraper
      * @param document
      */
-    public List<Movie> GenerateMovieFromDocument(Document document) {
-        movieList = new ArrayList<>();
+    public Movie GenerateMovieFromDocument(Document document) {
         Elements headlines = document.select("tbody");
         for (Element headline : headlines) {
             if (headline.childNode(0).toString().contains("Movies")) {
@@ -215,10 +212,10 @@ public class DataExtractor {
                     }
                 }
                 Movie movie = new Movie(idCounter++, title, category, genre, format, director, writers, stars, year);
-                movieList.add(movie);
+                return movie;
             }
         }
-        return movieList;
+        return null;
     }
 
 
