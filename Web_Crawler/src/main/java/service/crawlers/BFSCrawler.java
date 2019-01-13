@@ -96,7 +96,7 @@ public class BFSCrawler implements Crawler {
 
     public Document getDocument (URL url) throws IOException, UnknownHostException {
         this.visitedPages.add(url.toString());
-        this.connection = connection.url(this.startingUrl.toString());
+        this.connection = connection.url(url.toString());
         return this.connection.get();
     }
 
