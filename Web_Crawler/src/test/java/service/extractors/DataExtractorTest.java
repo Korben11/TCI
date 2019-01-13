@@ -4,20 +4,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import service.CrawlerExecuter;
 import service.models.Book;
 import service.models.Movie;
 import service.models.Music;
-
-import javax.xml.crypto.Data;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -38,26 +29,43 @@ public class DataExtractorTest {
         //Arrange
         document = mock(Document.class);
         dataExtractor = new DataExtractor();
-        Element element = new Element("test");
+
+        String title = "The Clean Coder: A Code of Conduct for Professional Programmers";
+        Element element = new Element("tbody");
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Category"))
+                .appendChild(new Element("td").append("Books")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Genre"))
+                .appendChild(new Element("td").append("Tech")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Format"))
+                .appendChild(new Element("td").append("Audio")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Year"))
+                .appendChild(new Element("td").append("2011")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Authors"))
+                .appendChild(new Element("td").append("Robert C. Martin")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Publisher"))
+                .appendChild(new Element("td").append("Prentice Hall")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("ISBN"))
+                .appendChild(new Element("td").append("007-6092046981")));
         Elements elements = new Elements();
         elements.add(element);
-        Book book = new Book(1L,
-                "Books",
-                "Tech",
-                "Ebook",
-                Arrays.asList("Robert C. Martin"),
-                "Prentice Hall",
-                "978-013235-0884",
-                2008);
 
-        when(document.select("div.media-details")).thenReturn(elements);
+        when(document.select("tbody")).thenReturn(elements);
+        when(document.title()).thenReturn(title);
 
         //Act
-        Book returnedBook = dataExtractor.GenerateBookFromDocument(document);
-
+        List<Book> returnedBook = dataExtractor.GenerateBookFromDocument(document);
 
         //Assert
-        assertEquals(book, returnedBook);
+        assertEquals(1, returnedBook.size());
+        assertTrue(returnedBook.get(0).getTitle() == title);
+        assertEquals("007-6092046981", returnedBook.get(0).getIsbn());
     }
 
 
@@ -69,26 +77,41 @@ public class DataExtractorTest {
      */
     @Test
     public void GenerateMusicFromDocumentMustReturnMusicObject(){
+
         //Arrange
         document = mock(Document.class);
         dataExtractor = new DataExtractor();
-        Element element = new Element("test");
+
+        String title = "Elvis Forever";
+        Element element = new Element("tbody");
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Category"))
+                .appendChild(new Element("td").append("Music")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Genre"))
+                .appendChild(new Element("td").append("Rock")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Format"))
+                .appendChild(new Element("td").append("Vinyl")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Year"))
+                .appendChild(new Element("td").append("2015")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Artist"))
+                .appendChild(new Element("td").append("Elvis Presley")));
         Elements elements = new Elements();
         elements.add(element);
-        Music music = new Music(1L,
-                "Music",
-                "Classical",
-                "CD",
-                "Ludwig van Beethoven",
-                2012);
 
-        when(document.select("div.media-details")).thenReturn(elements);
+        when(document.select("tbody")).thenReturn(elements);
+        when(document.title()).thenReturn(title);
 
         //Act
-        Music returnedMusic = dataExtractor.GenerateMusicFromDocument(document);
+        List<Music> returnedMusic = dataExtractor.GenerateMusicFromDocument(document);
 
         //Assert
-        assertEquals(music, returnedMusic);
+        assertEquals(1, returnedMusic.size());
+        assertTrue(returnedMusic.get(0).getTitle() == title);
+        assertEquals("Elvis Presley", returnedMusic.get(0).getArtist());
     }
 
 
@@ -100,28 +123,48 @@ public class DataExtractorTest {
      */
     @Test
     public void GenerateMovieFromDocumentMustReturnMovieObject(){
+
         //Arrange
         document = mock(Document.class);
         dataExtractor = new DataExtractor();
-        Element element = new Element("test");
+
+        String title = "Forrest Gump";
+        Element element = new Element("tbody");
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Category"))
+                .appendChild(new Element("td").append("Movies")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Genre"))
+                .appendChild(new Element("td").append("Drama")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Format"))
+                .appendChild(new Element("td").append("DVD")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Year"))
+                .appendChild(new Element("td").append("1994")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Director"))
+                .appendChild(new Element("td").append("Robert Zemeckis")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Writers"))
+                .appendChild(new Element("td").append("Winston Groom, Eric Roth")));
+        element.appendChild(new Element("tr")
+                .appendChild(new Element("th").append("Stars"))
+                .appendChild(new Element("td").append("Tom Hanks, Rebecca Williams, Sally Field, Michael Conner Humphreys")));
         Elements elements = new Elements();
         elements.add(element);
-        Movie movie = new Movie(1L,
-                "Forest Gump",
-                "Drama",
-                "DVD",
-                "Robert Zemeckis",
-                Arrays.asList("Winston Groom", "Eric Roth"),
-                Arrays.asList("Tom Hanks", "Rebecca Williams", "Sally Field", "Michael Conner Humphreys"),
-                1994);
 
-        when(document.select("div.media-details")).thenReturn(elements);
+        when(document.select("tbody")).thenReturn(elements);
+        when(document.title()).thenReturn(title);
 
         //Act
-        Movie returnedMovie = dataExtractor.GenerateMovieFromDocument(document);
+        List<Movie> returnedMovie = dataExtractor.GenerateMovieFromDocument(document);
 
         //Assert
-        assertEquals(movie, returnedMovie);
+        assertEquals(1, returnedMovie.size());
+        assertTrue(returnedMovie.get(0).getTitle() == title);
+        assertEquals(2, returnedMovie.get(0).getWriter().size());
+        assertTrue(returnedMovie.get(0).getWriter().contains("Winston Groom") && returnedMovie.get(0).getWriter().contains("Eric Roth"));
     }
 
 }
