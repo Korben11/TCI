@@ -24,19 +24,24 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The CrawlerController performs routing and committing data in json format to the end users through the endpoints
+ */
 @RestController
 public class CrawlerController {
     private static final String pathToBooks = "/books";
     private static final String pathToMusic = "/music";
     private static final String pathToMovies = "/movies";
-    private static final String pathToABook = pathToBooks + "/{id}";
-    private static final String pathToASong = pathToMusic + "/{id}";
-    private static final String pathToAMovie = pathToMovies + "/{id}";
     private DataExtractor dataExtractor = new DataExtractor();
     ObjectMapper mapper;
     BFSCrawler bfsCrawler;
 
-
+    /**
+     * Retrieves Book objects from scraped Documents, before converting to Json and display to users through the URL
+     * @return List of json strings
+     * @throws IOException
+     * @throws NextPageDoesNotExistsException
+     */
     @GetMapping(pathToBooks)
     public List GetAllBooksJson() throws IOException, NextPageDoesNotExistsException {
         ArrayList<String> bookJSONList = new ArrayList<>();
@@ -55,6 +60,12 @@ public class CrawlerController {
         return bookJSONList;
     }
 
+    /**
+     * Retrieves Music objects from scraped Documents, before converting to Json and display to users through the URL
+     * @return list of json strings
+     * @throws IOException
+     * @throws NextPageDoesNotExistsException
+     */
     @GetMapping(pathToMusic)
     public List GetAllMusicJson() throws IOException, NextPageDoesNotExistsException {
         ArrayList<String> musicJSONList = new ArrayList<>();
@@ -73,6 +84,12 @@ public class CrawlerController {
         return musicJSONList;
     }
 
+    /**
+     * Retrieves Movie objects from scraped Documents, before converting to Json and display to users through the URL
+     * @return list of json strings
+     * @throws IOException
+     * @throws NextPageDoesNotExistsException
+     */
     @GetMapping(pathToMovies)
     public List GetAllMoviesJson() throws IOException, NextPageDoesNotExistsException {
         ArrayList<String> movieJSONList = new ArrayList<>();
@@ -129,7 +146,4 @@ public class CrawlerController {
         String s = mapper.writeValueAsString(m);
         return s;
     }
-
-
-
 }

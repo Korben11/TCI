@@ -19,9 +19,6 @@ import java.util.List;
  */
 public class DataExtractor {
 
-    private List<Book> bookList;
-    private List<Music> musicList;
-    private List<Movie> movieList;
     private Long idCounter;
     private String category, genre, format, director, artist, publisher, isbn;
     private int year;
@@ -216,18 +213,5 @@ public class DataExtractor {
             }
         }
         return null;
-    }
-
-
-    public List<Book> getBookList() {
-        return bookList;
-    }
-
-    public List<Music> getMusicList() {
-        return musicList;
-    }
-
-    public List<Movie> getMovieList() {
-        return movieList;
     }
 }

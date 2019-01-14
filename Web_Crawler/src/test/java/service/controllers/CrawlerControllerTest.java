@@ -24,12 +24,12 @@ import static org.mockito.Mockito.when;
 
 
 public class CrawlerControllerTest {
+
     @Mock
     private BFSCrawler bfsCrawler;
 
     @Mock
     private Document document;
-
 
 
     @InjectMocks
@@ -43,10 +43,11 @@ public class CrawlerControllerTest {
 
 
     /**
-     * This test check if the method GetAllBooksJson returns the correct json list which is converted from a book list
-     * It uses a mock object "dataExtractor" provides a book list by calling the "getBookList()" method
-     * The object to test "crawlerController" uses dataExtractor.getBookList() to get all books then convert them to json
-     * @throws JsonProcessingException
+     * This test check if the method GetAllBooksJson returns the correct json list which is converted from a list of Books
+     * It uses a mock object "dataExtractor" that returns a Book object for any Document that contains information about a book
+     * The object to test "crawlerController" convert the retrieved book data to json
+     * @throws IOException
+     * @throws NextPageDoesNotExistsException
      */
     @Test
     public void GetAllBooksJsonShouldReturnListOfAllBookInJson() throws IOException, NextPageDoesNotExistsException {
@@ -88,13 +89,14 @@ public class CrawlerControllerTest {
     }
 
     /**
-     * This test check if the method GetAllMusicJson returns the correct json list which is converted from a music list
-     * It uses a mock object "dataExtractor" provides a music list by calling the "getMusicList()" method
-     * The object to test "crawlerController" uses dataExtractor.getMusicList() to get all music then convert them to json
-     * @throws JsonProcessingException
+     * This test check if the method GetAllMusicJson returns the correct json list which is converted from a list of Music
+     * It uses a mock object "dataExtractor" that returns a Music object for any Document that contains information about a music
+     * The object to test "crawlerController" convert the retrieved music data to json
+     * @throws IOException
+     * @throws NextPageDoesNotExistsException
      */
     @Test
-    public void GetAllMusicJsonShouldReturnListOfAllBookInJson() throws IOException, NextPageDoesNotExistsException {
+    public void GetAllMusicJsonShouldReturnListOfAllMusicInJson() throws IOException, NextPageDoesNotExistsException {
         //Arrange
         Element element = new Element("tbody");
         element.appendChild(new Element("tr")
@@ -131,14 +133,16 @@ public class CrawlerControllerTest {
         Assert.assertTrue(result.get(0).toString().contains(expectedJson));
     }
 
+
     /**
-     * This test check if the method GetAllMoviesJson returns the correct json list which is converted from a movie list
-     * It uses a mock object "dataExtractor" provides a movie list by calling the "getMovieList()" method
-     * The object to test "crawlerController" uses dataExtractor.getMovieList() to get all movies then convert them to json
-     * @throws JsonProcessingException
+     * This test check if the method GetAllMoviesJson returns the correct json list which is converted from a list of Movies
+     * It uses a mock object "dataExtractor" that returns a Movie object for any Document that contains information about a movie
+     * The object to test "crawlerController" convert the retrieved movie data to json
+     * @throws IOException
+     * @throws NextPageDoesNotExistsException
      */
     @Test
-    public void GetAllMoviesJsonShouldReturnListOfAllBookInJson() throws IOException, NextPageDoesNotExistsException {
+    public void GetAllMoviesJsonShouldReturnListOfAllMovieInJson() throws IOException, NextPageDoesNotExistsException {
         //Arrange
         Element element = new Element("tbody");
         element.appendChild(new Element("tr")

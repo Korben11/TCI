@@ -19,10 +19,11 @@ public class DataExtractorTest {
     private Document document;
 
     /**
-     * This test checks if Book objects are correctly retrieved from the Document file received from the crawler and scraper
-     * It use a mocked Document that contains objects of Element type which provides data of Book objects in HTML format
-     * The method GenerateBookFromDocument with parse those data into Book objects and return them
-     * The test basically determines if the identification of the expected object resembles the objects declared in the test method
+     * This test checks if Book object is correctly retrieved from the Document file received from the crawler and scraper
+     * It use a mocked Document that contains objects of Element type which provides data of Book object in HTML format
+     * The method GenerateBookFromDocument with parse those data into Book object and return it
+     * The test basically determines if the identification of the expected object resembles the object declared in the test method
+     * Test type: direct output (object Book must be generated)
      */
     @Test
     public void GenerateBookFromDocumentMustReturnBookObject(){
@@ -70,10 +71,11 @@ public class DataExtractorTest {
 
 
     /**
-     * This test checks if Music objects are correctly retrieved from the Document file received from the crawler and scraper
-     * It use a mocked Document that contains objects of Element type which provides data of Music objects in HTML format
-     * The method GenerateMusicFromDocument with parse those data into Music objects and return them
-     * The test basically determines if the identification of the expected object resembles the objects declared in the test method
+     * This test checks if Music object is correctly retrieved from the Document file received from the crawler and scraper
+     * It use a mocked Document that contains objects of Element type which provides data of Music object in HTML format
+     * The method GenerateMusicFromDocument with parse those data into Music object and return it
+     * The test basically determines if the identification of the expected object resembles the object declared in the test method
+     * Test type: direct output (object Music must be generated)
      */
     @Test
     public void GenerateMusicFromDocumentMustReturnMusicObject(){
@@ -115,10 +117,11 @@ public class DataExtractorTest {
 
 
     /**
-     * This test checks if Movie objects are correctly retrieved from the Document file received from the crawler and scraper
-     * It use a mocked Document that contains objects of Element type which provides data of Movie objects in HTML format
-     * The method GenerateMovieFromDocument with parse those data into Movie objects and return them
-     * The test basically determines if the identification of the expected object resembles the objects declared in the test method
+     * This test checks if Movie object is correctly retrieved from the Document file received from the crawler and scraper
+     * It use a mocked Document that contains objects of Element type which provides data of Movie object in HTML format
+     * The method GenerateMovieFromDocument with parse those data into Movie object and return it
+     * The test basically determines if the identification of the expected object resembles the object declared in the test method
+     * Test type: direct output (object Movie must be generated)
      */
     @Test
     public void GenerateMovieFromDocumentMustReturnMovieObject(){
@@ -168,8 +171,9 @@ public class DataExtractorTest {
 
     /**
      * This test checks if the movie title can be retrieved from the Document file received from the crawler and scraper
-     * It use mocked Document, Node and Element that help checking if the HTML data retrieved are that of Movie objects
+     * It use mocked Document, Node and Element that help checking if the HTML data retrieved are that of Movie object
      * The test should verify if the title() method is called during the data extracting process
+     * Test type: indirect input (title of the document must be processed)
      */
     @Test
     public void GenerateMovieFromDocumentShouldGetDocumentTitle(){
@@ -196,8 +200,9 @@ public class DataExtractorTest {
 
     /**
      * This test checks if the music title can be retrieved from the Document file received from the crawler and scraper
-     * It use mocked Document, Node and Element that help checking if the HTML data retrieved are that of Music objects
+     * It use mocked Document, Node and Element that help checking if the HTML data retrieved are that of Music object
      * The test should verify if the title() method is called during the data extracting process
+     * Test type: indirect input (title of the document must be processed)
      */
     @Test
     public void GenerateMusicFromDocumentShouldGetDocumentTitle(){
@@ -224,8 +229,9 @@ public class DataExtractorTest {
 
     /**
      * This test checks if the book title can be retrieved from the Document file received from the crawler and scraper
-     * It use mocked Document, Node and Element that help checking if the HTML data retrieved are that of Book objects
+     * It use mocked Document, Node and Element that help checking if the HTML data retrieved are that of Book object
      * The test should verify if the title() method is called during the data extracting process
+     * Test type: indirect input (title of the document must be processed)
      */
     @Test
     public void GenerateBookFromDocumentShouldGetDocumentTitle(){
